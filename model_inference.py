@@ -47,27 +47,23 @@ def calculate_bleu(predictions: list, references: list) -> float:
 # Main function
 if __name__ == '__main__':
     # Replace these example texts and references with your actual data
-    texts = [
-        "मुझे भूख लगी है",  # "I'm hungry"
-        "मेरा नाम अजय है",  # "My name is Ajay"
-        "यह एक सुंदर दिन है",  # "It is a beautiful day"
-        "क्या तुम मुझे सुन सकते हो?",  # "Can you hear me?"
-        "मुझे हिंदी सीखने में मजा आता है"  # "I enjoy learning Hindi"
-    ]
-    references = [
-        "నాకు ఆకలిగా ఉంది",  # "I'm hungry"
-        "నా పేరు అజయ్",  # "My name is Ajay"
-        "ఇది ఒక అందమైన రోజు",  # "It is a beautiful day"
-        "మీకు నాకు వినిపిస్తుందా?",  # "Can you hear me?"
-        "నాకు హిందీ నేర్చుకోవడం ఇష్టం"  # "I enjoy learning Hindi"
-    ]
-
+    texts = ["आप कैसे हैं"]
+    references = ["ఎలా మీరు"]
 
     # Perform batched inference
     translations = batched_inference(texts=texts)
-    
-    # Calculate BLEU score
+    print(f"Hindi text is :{texts}Translations is :{translations}")
+'''    # Calculate BLEU score
     bleu_score = calculate_bleu(translations, references)
     
-    print("Translations:", translations)
-    print("BLEU Score:", bleu_score)
+    print(f"Hindi text is :{texts}Translations is :{translations}")
+    print("BLEU Score:", bleu_score)'''
+    
+
+import nltk
+from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+# Calculate BLEU score
+smoothie = SmoothingFunction().method4
+bleu_score = sentence_bleu(references=references,hypothesis=translations, smoothing_function=smoothie)
+
+print(f"BLEU score: {bleu_score}")

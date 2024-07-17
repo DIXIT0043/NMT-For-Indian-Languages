@@ -1,13 +1,13 @@
-from datasets import load_metric
+#from datasets import load_metric
 import evaluate
-metric = evaluate.load("sacrebleu")
+#metric = evaluate.load("sacrebleu")
 # Key Parameter
-from_and_to_nmt = "hindi-to-telugu"
+from_and_to_nmt = "hindi-to-gujrati"
 batch_size = 16
 MAX_LEN = 40
 # LLM checkpoints settings
 model_checkpoint = "facebook/mbart-large-50-many-to-many-mmt"
-DATAPATH = r"C:\Users\kumar\OneDrive\Desktop\Final\Neural-Machine-Translation-and-Large-Language-Models-to-Bridge-Indian-Vernaculars\Neural-Machine-Translation-Training-Data.csv"
+DATAPATH = r"C:\Users\kumar\OneDrive\Desktop\Final\Neural-Machine-Translation-and-Large-Language-Models-to-Bridge-Indian-Vernaculars\NMT_data_cleaned.csv"
 
 if from_and_to_nmt == "hindi-to-bengali":
     INPUT_LANG = "hindi"
