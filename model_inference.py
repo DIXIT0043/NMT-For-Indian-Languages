@@ -5,8 +5,8 @@ from transformers import MBart50TokenizerFast, MBartForConditionalGeneration
 import evaluate
 
 # Paths to the tokenizer and model
-tokenizer_path = r"C:\Users\kumar\OneDrive\Desktop\Final\Neural-Machine-Translation-and-Large-Language-Models-to-Bridge-Indian-Vernaculars\tokenizer_hi-te"
-model_path = r"C:\Users\kumar\OneDrive\Desktop\Final\Neural-Machine-Translation-and-Large-Language-Models-to-Bridge-Indian-Vernaculars\translation-hi-te"
+tokenizer_path = r"C:\Users\kumar\OneDrive\Desktop\Final\Neural-Machine-Translation-and-Large-Language-Models-to-Bridge-Indian-Vernaculars\tokenizer_hi-bn"
+model_path = r"C:\Users\kumar\OneDrive\Desktop\Final\Neural-Machine-Translation-and-Large-Language-Models-to-Bridge-Indian-Vernaculars\translation-hi-bn"
 
 # Load evaluation metric
 bleu = evaluate.load("sacrebleu")
@@ -17,13 +17,13 @@ def inference(text: Union[str, list]) -> list:
     model = MBartForConditionalGeneration.from_pretrained(model_path)
     
     tokenizer.src_lang = "hi_IN"
-    tokenizer.tgt_lang = "te_IN"
+    tokenizer.tgt_lang = "bn_IN"
     
     if isinstance(text, str):
         text = [text]
     
     tokenized_text = tokenizer(text, return_tensors="pt", padding=True)
-    translation = model.generate(**tokenized_text, forced_bos_token_id=tokenizer.lang_code_to_id["te_IN"])
+    translation = model.generate(**tokenized_text, forced_bos_token_id=tokenizer.lang_code_to_id["bn_IN"])
     
     translated_text = tokenizer.batch_decode(translation, skip_special_tokens=True)
     return translated_text
@@ -47,23 +47,12 @@ def calculate_bleu(predictions: list, references: list) -> float:
 # Main function
 if __name__ == '__main__':
     # Replace these example texts and references with your actual data
-    texts = ["आप कैसे हैं"]
-    references = ["ఎలా మీరు"]
+    texts = ["शिव्या मूर्ख है"]
+    references = ['সিভরা পাগল']
 
     # Perform batched inference
     translations = batched_inference(texts=texts)
-    print(f"Hindi text is :{texts}Translations is :{translations}")
-'''    # Calculate BLEU score
-    bleu_score = calculate_bleu(translations, references)
-    
-    print(f"Hindi text is :{texts}Translations is :{translations}")
-    print("BLEU Score:", bleu_score)'''
-    
-
-import nltk
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+    print(f"Hindi text is :{texts}Translations in is :{translations}")
 # Calculate BLEU score
-smoothie = SmoothingFunction().method4
-bleu_score = sentence_bleu(references=references,hypothesis=translations, smoothing_function=smoothie)
-
-print(f"BLEU score: {bleu_score}")
+    bleu_score = calculate_bleu(translations, references)
+    print("BLEU Score:", bleu_score)

@@ -1,8 +1,8 @@
 #from datasets import load_metric
 import evaluate
-#metric = evaluate.load("sacrebleu")
+metric = evaluate.load("sacrebleu")
 # Key Parameter
-from_and_to_nmt = "hindi-to-gujrati"
+from_and_to_nmt = "hindi-to-bengali"
 batch_size = 16
 MAX_LEN = 40
 # LLM checkpoints settings
