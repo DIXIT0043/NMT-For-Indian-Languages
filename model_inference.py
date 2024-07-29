@@ -47,8 +47,8 @@ def calculate_bleu(predictions: list, references: list) -> float:
 # Main function
 if __name__ == '__main__':
     # Replace these example texts and references with your actual data
-    texts = ["शिव्या मूर्ख है"]
-    references = ['সিভরা পাগল']
+    texts = ["आप कैसे हैं"]
+    references = ['আপনি কেমন আছেন']
 
     # Perform batched inference
     translations = batched_inference(texts=texts)

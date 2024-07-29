@@ -9,7 +9,7 @@ def df_to_dataset(filepath: str) -> DatasetDict:
     temp_df = pd.read_csv(filepath)
     temp_df = temp_df[[config.df_src, config.df_trg]]
     temp_df.dropna(inplace=True)
-    temp_df = temp_df[:10]
+    temp_df = temp_df[:100]
     dataset = Dataset.from_pandas(temp_df)
     train_test = dataset.train_test_split(0.2)
     test_valid = train_test["test"].train_test_split(0.5)
